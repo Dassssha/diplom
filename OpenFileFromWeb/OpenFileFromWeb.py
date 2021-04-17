@@ -1,7 +1,10 @@
-#Author-Autodesk Inc.
-#Description-This is sample of opening files from web page.
+# Author-Autodesk Inc.
+# Description-This is sample of opening files from web page.
 
-import adsk.core, adsk.fusion, adsk.cam, traceback
+import adsk.core
+import adsk.fusion
+import adsk.cam
+import traceback
 from .scripts import gost8328_75
 
 commandDefinition = None
@@ -18,7 +21,7 @@ handlers = []
 #     msg += 'properties: ' + str(webArgs.properties) + '\n'
 #     msg += 'id: ' + str(webArgs.id) + '\n'
 #     msg += 'privateInfo: ' + str(webArgs.privateInfo) + '\n'
-    
+
 #     if webArgs.occurrenceOrDocument:
 #         doc = adsk.core.Document.cast(webArgs.occurrenceOrDocument)
 #         if doc:
@@ -29,35 +32,42 @@ handlers = []
 
 #     return msg
 
+
 def formatMsg(args):
     webArgs = adsk.core.WebRequestEventArgs.cast(args)
-    Description = str(webArgs.properties["Description"])
+    Description = str(webArgs.privateInfo)
+    # Description.split("Description\".\"")[1]
     return Description
+
 
 class OpenFromWebExecutedEventHandler(adsk.core.CommandEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
-            
-            import webbrowser, os
+            ui = app.userInterface
+
+            import webbrowser
+            import os
             # sampleHTMLFilePath = 'file:///' + os.path.join(os.path.dirname(os.path.realpath(__file__)), sampleHTMLFileName)
             webbrowser.open("http://localhost:4200/")
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
+
 class OpenFromWebCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
+            ui = app.userInterface
 
             # Connect to the command executed event.
             cmd = args.command
@@ -67,19 +77,21 @@ class OpenFromWebCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
-                
+
+
 class InsertingFromURLEventHandler(adsk.core.WebRequestEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
+            ui = app.userInterface
 
             # temp.bearing20001(app.activeProduct)
-            
-            #args.isCanceled = True
+
+            # args.isCanceled = True
             msg = "The InsertingFromURL event is fired.\n\n"
             msg += formatMsg(args)
             ui.messageBox(msg)
@@ -87,37 +99,45 @@ class InsertingFromURLEventHandler(adsk.core.WebRequestEventHandler):
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
-                
+
+
 class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
-            
-            msg = "The InsertedFromURL event is fired.\n\n"
-            msg += formatMsg(args)
-            
-            ui.messageBox(msg)
+            ui = app.userInterface
+            design = app.activeProduct
+            rootComp = design.rootComponent
+            occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
+            occurence.component.name += "_" + str(rootComp.occurrences.count-1) 
+            parametres = occurence.component.parentDesign.allParameters
+
+            Description = formatMsg(args)
+            gost8328_75.run(parametres,Description)
+            ui.messageBox(Description)
 
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
-                
+
+
 class OpeningFromURLEventHandler(adsk.core.WebRequestEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
-            
+            ui = app.userInterface
+
             # temp.bearing20001(app.activeProduct)
 
-            #args.isCanceled = True
+            # args.isCanceled = True
             msg = "The OpeningFromURL event is fired.\n\n"
             msg += formatMsg(args)
             ui.messageBox(msg)
@@ -125,21 +145,21 @@ class OpeningFromURLEventHandler(adsk.core.WebRequestEventHandler):
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
-                
+
+
 class OpenedFromURLEventHandler(adsk.core.WebRequestEventHandler):
     def __init__(self):
         super().__init__()
+
     def notify(self, args):
         ui = None
         try:
             app = adsk.core.Application.get()
-            ui  = app.userInterface
+            ui = app.userInterface
             design = app.activeProduct
             rootComp = design.rootComponent
             occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
             parametres = occurence.component.parentDesign.allParameters
-
-            
 
             msg = "The OpenedFromURL event is fired.\n\n"
             msg += formatMsg(args)
@@ -149,6 +169,7 @@ class OpenedFromURLEventHandler(adsk.core.WebRequestEventHandler):
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
+
 def run(context):
     ui = None
     try:
@@ -156,19 +177,21 @@ def run(context):
         commandName = 'Open Files from a Web Page'
         commandDescription = 'This is a sample of opening files from web page.'
         panelId = 'SolidScriptsAddinsPanel'
-        
+
         app = adsk.core.Application.get()
-        ui  = app.userInterface
+        ui = app.userInterface
 
         # create the command definition
         commandDefinition = ui.commandDefinitions.itemById(commandId)
         # delete any existing command definition, and just recreate it
         if commandDefinition:
-        	commandDefinition.deleteMe()
-        commandDefinition = ui.commandDefinitions.addButtonDefinition(commandId, commandName, commandDescription)
+            commandDefinition.deleteMe()
+        commandDefinition = ui.commandDefinitions.addButtonDefinition(
+            commandId, commandName, commandDescription)
         onCommandCreated = OpenFromWebCreatedEventHandler()
         commandDefinition.commandCreated.add(onCommandCreated)
-        handlers.append(onCommandCreated) # keep the handler referenced beyond this function
+        # keep the handler referenced beyond this function
+        handlers.append(onCommandCreated)
 
         # insert the command into the model:add-ins toolbar
         toolbarControls = ui.allToolbarPanels.itemById(panelId).controls
@@ -178,27 +201,28 @@ def run(context):
         if toolbarControl:
             toolbarControl.deleteMe()
         toolbarControl = toolbarControls.addCommand(commandDefinition)
-        
+
         onInsertingFromURL = InsertingFromURLEventHandler()
         app.insertingFromURL.add(onInsertingFromURL)
         handlers.append(onInsertingFromURL)
-        
+
         onInsertedFromURL = InsertedFromURLEventHandler()
         app.insertedFromURL.add(onInsertedFromURL)
         handlers.append(onInsertedFromURL)
-        
+
         onOpeningFromURL = OpeningFromURLEventHandler()
         app.openingFromURL.add(onOpeningFromURL)
         handlers.append(onOpeningFromURL)
-        
+
         onOpenedFromURL = OpenedFromURLEventHandler()
         app.openedFromURL.add(onOpenedFromURL)
         handlers.append(onOpenedFromURL)
-        
+
         ui.messageBox("The command is added to MODEL:ADD-INS panel.")
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
 
 def stop(context):
     ui = None
