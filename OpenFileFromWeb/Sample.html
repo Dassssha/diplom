@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample of opening from web page</title>
+</head>
+<body>
+    URN or full path to a local file:<br />
+
+    <! Create input field to get the urn or full path to a local file.>
+    <input id='fileinput' type='text' size='75' />
+
+    <! Button that populates field with a known good URN.>
+    <button type='button' onclick='document.getElementById("fileinput").value="file:///C:/Users/8916m/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/Diplom/Bearing%20GOST%208328-75_2000.f3d"'>Populate URN</button> <br /><br />
+
+    <! Create button for opening the file in Fusion.>
+    <button type='button' onclick='window.location.href = "fusion360://command=open&file=" + encodeURIComponent(document.getElementById("fileinput").value)'>Open in Fusion 360</button> <br /><br />
+
+    <! Create button for inserting the file in the active design with move and fit.>
+    <button type='button' onclick='window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(document.getElementById("fileinput").value)'>Insert in Fusion360</button> <br /><br />
+
+    <! Create button for inserting the file in the active design without allowing the user to move it.>
+    <button type='button' onclick='window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(document.getElementById("fileinput").value) + "&NoMove=true"'>Insert in Fusion360 without move</button> <br /><br />
+
+    <! Create button for inserting the file in the active design without fitting the view.>
+    <button type='button' onclick='window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(document.getElementById("fileinput").value) + "&NoFit=true"'>Insert in Fusion360 without fit</button> <br /><br />
+
+    <! Create button for inserting the file in the active design without moving or fitting the view.>
+    <button type='button' onclick='window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(document.getElementById("fileinput").value) + "&NoFit=true&NoMove=true"'>Insert in Fusion360 without move or fit</button> <br /><br />
+
+    <div>
+        <div>
+            <label>Part Number: </label><input id="open_part_number" type="text" value="ABC" />
+            <label>Part Name: </label><input id="open_part_name" type="text" value="GearPart" />
+            <label>Description: </label><input id="open_part_description" type="text" value="This is a SpurGear" />
+        </div>
+        <div>
+            <label>Private Info: </label><input id="open_private_info" type="text" size='75' value="This is private info of OpenFileFromWeb add-in" />
+        </div>
+    </div>
+    <! Create button for opening the file in Fusion with properties and private info.>
+    <button type='button' onclick='openWithProperties()'>Open in Fusion 360 with properties and private info</button> <br /><br />
+
+    <div>
+        <div>
+            <label>ID: </label><input id="insert_component_id" type="text" size='50' value="F28054C5-73BD-4900-B675-67985D017866" />
+        </div>
+        <div>
+            <label>Part Number: </label><input id="insert_part_number" type="text" value="ABC" />
+            <label>Part Name: </label><input id="insert_part_name" type="text" value="GearPart" />
+            <label>Description: </label><input id="insert_part_description" type="text" value="This is a SpurGear" />
+        </div>
+        <div>
+            <label>Private Info: </label><input id="insert_private_info" type="text" size='75' value="This is private info of OpenFileFromWeb add-in" />
+        </div>
+    </div>
+    <! Create button for inserting the file in the active design with move, fit, id, properties and private info.>
+    <button type='button' onclick='insertWithProperties()'>Insert in Fusion360 with id, properties and private info</button> <br /><br />
+
+    <script>
+        function openWithProperties() {
+            var properties = {
+                "PartNumber": document.getElementById("open_part_number").value,
+                "PartName": document.getElementById("open_part_name").value,
+                "Description": document.getElementById("open_part_description").value
+            }
+            window.location.href = "fusion360://command=open&file=" + encodeURIComponent(document.getElementById("fileinput").value) +
+                "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
+                "&privateInfo=" + encodeURIComponent(document.getElementById("open_private_info").value);
+        }
+
+        function insertWithProperties() {
+            var properties = {
+                "PartNumber": document.getElementById("insert_part_number").value,
+                "PartName": document.getElementById("insert_part_name").value,
+                "Description": document.getElementById("insert_part_description").value
+            }
+            window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(document.getElementById("fileinput").value) +
+                "&properties=" + encodeURIComponent(JSON.stringify(properties)) + 
+                "&privateInfo=" + encodeURIComponent(document.getElementById("insert_private_info").value) +
+                "&id=" + encodeURIComponent(document.getElementById("insert_component_id").value);
+        }
+    </script>
+</body>
+</html>

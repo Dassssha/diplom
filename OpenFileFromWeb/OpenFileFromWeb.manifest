@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"af85c5c2-4c18-4b59-8c02-2564a5787d98",
+	"author":	"Autodesk Inc.",
+	"description":	{
+		"":	"This is sample of opening files from web page."
+	},
+	"version":	"",
+	"runOnStartup":	false,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}

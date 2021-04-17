@@ -1,0 +1,6 @@
+{
+	"python.autoComplete.extraPaths":	["C:/Users/Misha/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs", "C:/Users/8916m/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs"],
+	"python.pythonPath":	"C:\\Users\\8916m\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+	"python.linting.pylintEnabled":	false,
+	"python.analysis.extraPaths":	["C:/Users/8916m/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs"]
+}
