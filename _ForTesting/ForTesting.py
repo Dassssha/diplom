@@ -9,7 +9,7 @@ def run(context):
     ui = None
     try:
         # Переменные
-        params = {"d":300, "D":620, "B":185, "r":10,"r1":7.5}
+        params = {"d":20, "D":42, "B":12, "r":1.5,"r1":0.5}
         d = params["d"]
         D = params["D"]
         B = params["B"]
@@ -29,16 +29,19 @@ def run(context):
         design = app.activeProduct
         components = design.allComponents
         rootComp = design.rootComponent
-
+        component = rootComp
         # Получаем ссылку на нужный компонент
-        occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
+        # occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
         # Получаем массив
-        patternFeature = occurence.component.features.circularPatternFeatures[0]
+        # patternFeature = occurence.component.features.circularPatternFeatures[0]
+        patternFeature = component.features.circularPatternFeatures[0]
         # Получаем скетч и его размеры
-        sketches = occurence.component.sketches[0]
+        # sketches = occurence.component.sketches[0]
+        sketches = component.sketches[0]
         sketchDimensions = sketches.sketchDimensions
         # Получаем коллекцию скруглений
-        filletFeatures = occurence.component.features.filletFeatures
+        # filletFeatures = occurence.component.features.filletFeatures
+        filletFeatures = component.features.filletFeatures
         
         # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(B) + " mm"

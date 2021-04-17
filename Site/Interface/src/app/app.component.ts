@@ -11,14 +11,16 @@ export class AppComponent {
   insertFile() {
 
     var properties = {
-      "PartNumber": "21345",
+      "PartNumber": "",
       "PartName": "Bearing 8328-75 2000",
-      "Description": this.setString()
+      "Description": ""
     }
     window.location.href = "fusion360://command=insert&file=" + encodeURIComponent("C:/Users/Misha/Desktop/DiplomProject/Bearing_GOST_8328-75_2000.f3d") +
       "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
       "&privateInfo=" + encodeURIComponent(this.setString()) +
-      "&id=" + encodeURIComponent("gege");
+      "&id=" + encodeURIComponent(Date.now().toString()); //id будет формироваться как номергоста_номердетали
+      //это строго необходимо, т.к. при импорте детали, eсли id у деталей равны, он просто делает копию, и они связаны становятся
+      //сейчас это тек.дата как временная заглушка
   }
 
   setString() {

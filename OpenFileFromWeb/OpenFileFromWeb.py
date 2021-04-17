@@ -113,11 +113,11 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
             design = app.activeProduct
             rootComp = design.rootComponent
             occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
-            occurence.component.name += "_" + str(rootComp.occurrences.count-1) 
-            parametres = occurence.component.parentDesign.allParameters
+            # occurence.component.name += "_" + str(rootComp.occurrences.count-1) 
+            # parametres = occurence.component.parentDesign.allParameters
 
             Description = formatMsg(args)
-            gost8328_75.run(parametres,Description)
+            gost8328_75.run(occurence,Description)
             ui.messageBox(Description)
 
         except:
