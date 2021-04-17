@@ -53,7 +53,8 @@ def run(context):
         patternFeature.quantity.expression = str(CylCount)
 
         # Правим скругления
-        filletFeatures[0]
+        filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
+        filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
 
         u = 0
     except:
