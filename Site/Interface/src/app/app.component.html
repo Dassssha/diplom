@@ -1,4 +1,3 @@
-
 <button (click)="insertFile()">Buttton</button>
 
 <input value="20" id="d">
@@ -8,3 +7,21 @@
 <input value="0.5" id="_r1">
 
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">GOST</th>
+            <th scope="col">TYPE</th>
+            <th scope="col">MODEL_URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let gost of gosts">
+            <th>{{gost.ID}}</th>
+            <td>{{gost.GOST}}</td>
+            <td>{{gost.TYPE}}</td>
+            <td>{{gost.MODEL_URL}}</td>
+        </tr>
+    </tbody>
+</table>

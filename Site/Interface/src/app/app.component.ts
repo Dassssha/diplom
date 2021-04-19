@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GostsService } from './services/gosts.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Interface';
+  gosts: any[];
+  constructor(private gostsService: GostsService){
+
+  }
+
+  async ngOnInit(){
+    await this.getData();
+  }
+
+  async getData(){
+    try{
+      let gosts = this.gostsService.getAllGosts()
+      this.gosts =  await gosts;
+    }
+    catch(err){
+      console.error(err);
+    }
+  }
 
   insertFile() {
 

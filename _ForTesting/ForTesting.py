@@ -8,20 +8,20 @@ import adsk.core, adsk.fusion, adsk.cam, traceback, math
 def run(context):
     ui = None
     try:
-        # Переменные
-        params = {"d":20, "D":42, "B":12, "r":1.5,"r1":0.5}
-        d = params["d"]
-        D = params["D"]
-        B = params["B"]
-        r = params["r"]
-        r1 = params["r1"]
+        # # Переменные
+        # params = {"d":20, "D":42, "B":12, "r":1.5,"r1":0.5}
+        # d = params["d"]
+        # D = params["D"]
+        # B = params["B"]
+        # r = params["r"]
+        # r1 = params["r1"]
 
-        ADA = B*0.25
-        BID1 = d + (D-d)/3.33333333
-        KAD1 = BID1 + 1.33333 * (D-d)/3.33333333
-        KID1 = BID1 / 1.11111111111
+        # ADA = B*0.25
+        # BID1 = d + (D-d)/3.33333333
+        # KAD1 = BID1 + 1.33333 * (D-d)/3.33333333
+        # KID1 = BID1 / 1.11111111111
 
-        CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+        # CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
 
         # Стандартные получалки
         app = adsk.core.Application.get()
@@ -34,30 +34,31 @@ def run(context):
         # occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
         # Получаем массив
         # patternFeature = occurence.component.features.circularPatternFeatures[0]
-        patternFeature = component.features.circularPatternFeatures[0]
+        # patternFeature = component.features.circularPatternFeatures[0]
         # Получаем скетч и его размеры
         # sketches = occurence.component.sketches[0]
-        sketches = component.sketches[0]
-        sketchDimensions = sketches.sketchDimensions
+        # sketches = component.sketches[0]
+        # sketchDimensions = sketches.sketchDimensions
         # Получаем коллекцию скруглений
         # filletFeatures = occurence.component.features.filletFeatures
-        filletFeatures = component.features.filletFeatures
-        
+        # filletFeatures = component.features.filletFeatures
+        extrudeFeatures = component.features.extrudeFeatures
+        ui = 0
         # Вносим новые параметры
-        sketchDimensions[0].parameter.expression = str(B) + " mm"
-        sketchDimensions[1].parameter.expression = str(d) + " mm"
-        sketchDimensions[2].parameter.expression = str(ADA) + " mm"
-        sketchDimensions[3].parameter.expression = str(KID1) + " mm"
-        sketchDimensions[4].parameter.expression = str(BID1) + " mm"
-        sketchDimensions[5].parameter.expression = str(KAD1) + " mm"
-        sketchDimensions[8].parameter.expression = str(D) + " mm"
+        # sketchDimensions[0].parameter.expression = str(B) + " mm"
+        # sketchDimensions[1].parameter.expression = str(d) + " mm"
+        # sketchDimensions[2].parameter.expression = str(ADA) + " mm"
+        # sketchDimensions[3].parameter.expression = str(KID1) + " mm"
+        # sketchDimensions[4].parameter.expression = str(BID1) + " mm"
+        # sketchDimensions[5].parameter.expression = str(KAD1) + " mm"
+        # sketchDimensions[8].parameter.expression = str(D) + " mm"
         
         # Изменяем количество цилиндров
-        patternFeature.quantity.expression = str(CylCount)
+        # patternFeature.quantity.expression = str(CylCount)
 
         # Правим скругления
-        filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
-        filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
+        # filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
+        # filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
 
         u = 0
     except:
