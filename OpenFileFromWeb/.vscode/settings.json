@@ -1,6 +1,6 @@
 {
 	"python.autoComplete.extraPaths":	["C:/Users/Misha/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs", "C:/Users/8916m/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs"],
-	"python.pythonPath":	"C:/Users/Misha/AppData/Local/Autodesk/webdeploy/production/5873edb3ce0a7ce93d3ee911f7ba68d35a7e5862/Python/python.exe",
+	"python.pythonPath":	"C:/Users/8916m/AppData/Local/Autodesk/webdeploy/production/5873edb3ce0a7ce93d3ee911f7ba68d35a7e5862/Python/python.exe",
 	"python.linting.pylintEnabled":	false,
 	"python.analysis.extraPaths":	["C:/Users/8916m/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs", "C:/Users/Misha/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/Python/defs"]
 }

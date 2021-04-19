@@ -94,7 +94,7 @@ class InsertingFromURLEventHandler(adsk.core.WebRequestEventHandler):
             # args.isCanceled = True
             msg = "The InsertingFromURL event is fired.\n\n"
             msg += formatMsg(args)
-            ui.messageBox(msg)
+            # ui.messageBox(msg)
 
         except:
             if ui:
@@ -113,8 +113,6 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
             design = app.activeProduct
             rootComp = design.rootComponent
             occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
-            # occurence.component.name += "_" + str(rootComp.occurrences.count-1) 
-            # parametres = occurence.component.parentDesign.allParameters
 
             Description = formatMsg(args)
             gost8328_75.run(occurence,Description)

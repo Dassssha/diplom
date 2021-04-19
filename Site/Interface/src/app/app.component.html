@@ -6,14 +6,16 @@
                 <th scope="col">GOST</th>
                 <th scope="col">TYPE</th>
                 <th scope="col">MODEL_URL</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let gost of gosts" (click)="getTypeGOSTS(gost)">
+            <tr *ngFor="let gost of gosts">
                 <th>{{gost.ID}}</th>
                 <td>{{gost.GOST}}</td>
                 <td>{{gost.TYPE}}</td>
                 <td>{{gost.MODEL_URL}}</td>
+                <td><button class="btn btn-success" (click)= "getTypeGOSTS(gost)">Выбрать</button></td>
             </tr>
         </tbody>
     </table>
@@ -28,10 +30,11 @@
                 <th scope="col">B mm</th>
                 <th scope="col">r mm</th>
                 <th scope="col">r1 mm</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let TypeGost of TypeGosts" (click)= "insertFile(TypeGost)">
+            <tr *ngFor="let TypeGost of TypeGosts">
                 <th>{{TypeGost.GOST}}</th>
                 <td>{{TypeGost.NUMBER}}</td>
                 <td>{{TypeGost._d}}</td>
@@ -39,6 +42,7 @@
                 <td>{{TypeGost.B}}</td>
                 <td>{{TypeGost.r}}</td>
                 <td>{{TypeGost.r1}}</td>
+                <td><button class="btn btn-primary" (click)= "insertFile(TypeGost)">Вставить</button></td>
             </tr>
         </tbody>
     </table>
