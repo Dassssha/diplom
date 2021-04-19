@@ -1,27 +1,45 @@
-<button (click)="insertFile()">Buttton</button>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">GOST</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">MODEL_URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let gost of gosts" (click)="getTypeGOSTS(gost)">
+                <th>{{gost.ID}}</th>
+                <td>{{gost.GOST}}</td>
+                <td>{{gost.TYPE}}</td>
+                <td>{{gost.MODEL_URL}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-<input value="20" id="d">
-<input value="42" id="D">
-<input value="12" id="B">
-<input value="1" id="_r">
-<input value="0.5" id="_r1">
-
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">GOST</th>
-            <th scope="col">TYPE</th>
-            <th scope="col">MODEL_URL</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let gost of gosts">
-            <th>{{gost.ID}}</th>
-            <td>{{gost.GOST}}</td>
-            <td>{{gost.TYPE}}</td>
-            <td>{{gost.MODEL_URL}}</td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">GOST_ID</th>
+                <th scope="col">NUMBER</th>
+                <th scope="col">d mm</th>
+                <th scope="col">D mm</th>
+                <th scope="col">B mm</th>
+                <th scope="col">r mm</th>
+                <th scope="col">r1 mm</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let TypeGost of TypeGosts" (click)= "insertFile(TypeGost)">
+                <th>{{TypeGost.GOST}}</th>
+                <td>{{TypeGost.NUMBER}}</td>
+                <td>{{TypeGost._d}}</td>
+                <td>{{TypeGost.D}}</td>
+                <td>{{TypeGost.B}}</td>
+                <td>{{TypeGost.r}}</td>
+                <td>{{TypeGost.r1}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
