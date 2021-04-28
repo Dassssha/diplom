@@ -11,7 +11,7 @@ export class GostsService extends BaseApiService {
   constructor(public http: HttpClient) {
     super(http);
     this.options = new HttpHeaders();
-    this.options = this.options.set("Content-Type", "application/json");
+    this.options = this.options.set("Content-Type", "application/json");//параметры такие , потому что получаем данные в json
   }
 
   getAllGosts() {

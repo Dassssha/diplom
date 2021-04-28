@@ -20,7 +20,7 @@ app.use(function(req,res,next){
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+// получение списка перечня всех гостов
 app.get("/", function (req, res,next) {
     pool.query("SELECT * FROM `GOST_TYPES`", function (err, data) {
         if (err) return console.log(err);

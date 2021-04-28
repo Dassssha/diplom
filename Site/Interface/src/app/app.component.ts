@@ -6,30 +6,31 @@ import { GostsService } from './services/gosts.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+
+export class AppComponent { 
   title = 'Interface';
   gosts: any[];
   gost: any;
   TypeGosts: any[];
-  constructor(private gostsService: GostsService){
+  constructor(private gostsService: GostsService){//получаем доступ к серверу
 
   }
-
+//вроде как отвечает за инициализацию компонентк, эти данные подгружаются из бд сразу на страницу при ее открытии(это главнная страница)
   async ngOnInit(){
     await this.getGosts();
-    // await this.getTypeGOSTS('8328-75');
   }
 
+   //получаем из сервиса данные, связанные с гостами
   async getGosts(){
     try{
-      let gosts = this.gostsService.getAllGosts()
+      let gosts = this.gostsService.getAllGosts()//gosts получаем список всех гостов, которые есть на сервере
       this.gosts =  await gosts;
     }
     catch(err){
       console.error(err);
     }
   }
-
+  //получаем данные о типе госта
   async getTypeGOSTS(gost){
     this.gost = gost;
     try{
